@@ -80,6 +80,12 @@
           },
           "defaultConfiguration": "production"
         },
+        "deploy": {
+          "builder": "@angular/build:application",
+          "options": {
+            "baseHref": "/angular-input-demo/"
+          }
+        },
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {

@@ -1,5 +1,7 @@
 # angular-input-demo
 
+> Live-Demo: https://reisi007.github.io/angular-input-demo/
+
 A custom multi-select chips component for Angular Material, built with reactive forms integration and autocomplete.
 
 ## Tech Stack
@@ -43,4 +45,16 @@ The abstract class `FormFieldMultiSelectBase<T>` consolidates all `ControlValueA
 pnpm install      # Install dependencies
 pnpm start        # Start dev server (ng serve)
 pnpm test         # Run Vitest tests
+```
+
+## Deployment (GitHub Pages)
+
+Das Projekt wird automatisch per GitHub Actions auf GitHub Pages veröffentlicht. Bei jedem Push auf den `main`-Branch baut der Workflow (`.github/workflows/deploy.yml`) die App und deployt sie nach `https://reisi007.github.io/angular-input-demo/`.
+
+Die App verwendet `baseHref: /angular-input-demo/` (siehe `angular.json`), damit sie unter dem Repository-Unterpfad korrekt lädt.
+
+Lokal mit korrektem Base-Path bauen:
+
+```sh
+pnpm ng build --configuration production --base-href /angular-input-demo/
 ```
