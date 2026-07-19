@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-2">
+  <mat-chip-grid
+    #chipGrid
+    class="flex flex-wrap items-center gap-1 min-h-0"
+    [class.hidden]="!selected().length"
+    [ariaHidden]="!selected().length"
+  >
+    @for (option of selected(); track option.value) {
+      <mat-chip-row (removed)="removeChip(option)">
+        {{ option.label }}
+        <button matChipRemove [attr.aria-label]="'remove ' + option.label">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+  </mat-chip-grid>
+
+  <input
+    #input
+    matInput
+    class="min-w-16 w-full outline-none"
+    [matChipInputFor]="chipGrid"
+    (matChipInputTokenEnd)="onChipInputEnd($event)"
+    [matAutocomplete]="auto"
+    [value]="inputValue()"
+    (input)="inputValue.set($any($event.target).value)"
+    [disabled]="disabled"
+    [placeholder]="placeholder"
+  />
+</div>
+
+<mat-autocomplete
+  #auto="matAutocomplete"
+  autoActiveFirstOption
+  [displayWith]="displayFn"
+  (optionSelected)="onOptionSelected($event)"
+>
+  @for (option of filteredOptions(); track option.value) {
+    <mat-option [value]="option.value">{{ option.label }}</mat-option>
+  } @empty {
+    <mat-option disabled>Keine Treffer</mat-option>
+  }
+</mat-autocomplete>

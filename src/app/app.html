@@ -1,0 +1,43 @@
+<main class="mx-auto flex max-w-xl flex-col gap-8 p-8">
+  <header class="flex flex-col gap-1">
+    <h1 class="text-2xl font-semibold">Multi-Select Demo</h1>
+    <p class="text-sm opacity-70">
+      Chips + Autocomplete als Reactive-Form-Control in
+      <code>&lt;mat-form-field&gt;</code>.
+    </p>
+  </header>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Lieblings-Frameworks</mat-label>
+    <app-multi-select-chips
+      [formControl]="frameworks"
+      [options]="options"
+      placeholder="Framework suchen…"
+      required
+    />
+    <mat-icon matPrefix class="mr-1">code</mat-icon>
+    <mat-hint>Mindestens 2 auswählen.</mat-hint>
+    @if (frameworks.hasError('minSelected')) {
+      <mat-error>Bitte mindestens 2 Frameworks auswählen.</mat-error>
+    }
+    @if (frameworks.hasError('required')) {
+      <mat-error>Pflichtfeld.</mat-error>
+    }
+  </mat-form-field>
+
+  <section class="flex flex-col gap-2">
+    <button
+      type="button"
+      class="self-start rounded-md bg-[var(--mat-sys-primary)] px-4 py-2 text-[var(--mat-sys-on-primary)]"
+      (click)="frameworks.reset([])"
+    >
+      Zurücksetzen
+    </button>
+
+    <div class="rounded-md bg-black/5 p-4 font-mono text-sm">
+      <div><strong>value:</strong> {{ valueJson() }}</div>
+      <div><strong>status:</strong> {{ frameworks.status }}</div>
+      <div><strong>touched:</strong> {{ frameworks.touched }}</div>
+    </div>
+  </section>
+</main>
